@@ -29,7 +29,7 @@ with open(csvpath) as csvfile:
     
 #calculate List of Changes in Profit & Losses
 m = len(profit_losses) - 1
-p_l_change = [profit_losses[i] - profit_losses[i-1] for i in range(1, len(profit_losses), 1)]   
+p_l_change = [profit_losses[i] - profit_losses[i-1] for i in range(1, len(profit_losses), 1)]
 
 # Calculations:
 #------------------------------------------------------------------------------------------------------------------------
@@ -59,7 +59,7 @@ min_date_index = min_index + 1
 min_date = months[min_date_index]
 
 
-#Output to Text
+#Print to Terminal
 #------------------------------------------------------------------------------------------------------------------------
 print("Financial Analysis")
 print("-----------------------------------------")
@@ -69,3 +69,16 @@ print(f"Average Change: ${avg_p_l_change:.2f}")
 print(f"Greatest Increase in Profits: {max_date} (${max_change})")
 print(f"Greatest Decrease in Profits: {min_date} (${min_change})")
 
+#Export to Text File
+#------------------------------------------------------------------------------------------------------------------------
+csvpath = os.path.join('PyBank', 'Financial_Analysis_Summary.txt')
+
+with open(csvpath,'w') as txt:
+    
+    txt.writelines("Financial Analysis\n")
+    txt.writelines("-----------------------------------------\n")
+    txt.writelines(f"Total Months: {Total_Months}\n")
+    txt.writelines(f"Total: ${Net_Profits}\n")
+    txt.writelines(f"Average Change: ${avg_p_l_change:.2f}\n")
+    txt.writelines(f"Greatest Increase in Profits: {max_date} (${max_change})\n")
+    txt.writelines(f"Greatest Decrease in Profits: {min_date} (${min_change})\n")
