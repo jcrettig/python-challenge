@@ -71,7 +71,8 @@ print(f"Greatest Decrease in Profits: {min_date} (${min_change})")
 
 #Export to Text File
 #------------------------------------------------------------------------------------------------------------------------
-csvpath = os.path.join('PyBank', 'Financial_Analysis_Summary.txt')
+#csvpath = os.path.join('PyBank', 'Financial_Analysis_Summary.txt')
+csvpath = os.path.join('PyBank', 'Analysis', 'Financial_Analysis_Summary.txt')
 
 with open(csvpath,'w') as txt:
     
