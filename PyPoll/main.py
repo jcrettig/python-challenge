@@ -36,70 +36,40 @@ print("----------------------------")
 print(f"Total Votes: {total_votes}")
 print("----------------------------")
 
-# Export to textfile
-# csvpath = os.path.join('PyPoll', 'Analysis', 'Election_Results_Summary.txt')
-# with open(csvpath,'w') as txt:
-    
-    # txt.writelines("Election Results")
-    # txt.writelines("----------------------------")
-    # txt.writelines(f"Total Votes: {total_votes}")
-    # txt.writelines("----------------------------")
-
-#Create list of unique candidates
+#Determine who are the unique candidates
 candidate_list = set(candidate_column)
 
-#For each candidate in "candidates" find the number of votes the candidate won and store it
-candidate_info = {}#Jacob
+#Create Dictionary infrastructure and identify number_of_votes and the key
+candidate_info = {}
 for candidate_x in candidate_list:
-    Number_of_Votes = len([x for x in candidate_column if x == candidate_x])
+    number_of_votes = len([x for x in candidate_column if x == candidate_x])
         
     #Calculate perecent of votes
-    canidate_percent = 100 * Number_of_Votes / total_votes
+    canidate_percent = 100 * number_of_votes / total_votes
 
+    #Insert components of dictionary consisting of number_of_votes, candidate_x and candidate_percent
+    candidate_info[number_of_votes] = (candidate_x, canidate_percent)
 
-    candidate_info[Number_of_Votes] = (candidate_x, canidate_percent)#Jacob
+#Create a list from the "candidate_info" dictionary of the keys
+votes = list(candidate_info.keys())
 
-    #Print to Terminal
-    #print(f"{candidate_x}: {canidate_percent}% ({Number_of_Votes})")
-
-
-votes = list(candidate_info.keys())#Jacob Section
-votes.sort()
+#sort keys (votes) in decending order
+votes.sort(reverse=True)
+# pull data from dictionary to print
 for key in votes:
-    name = candidate_info[key][0]
-    percent = candidate_info[key][1]
+    value = candidate_info[key]
+    name = value[0]
+    percent = value[1]
     numVotes = key
-    print(f'{name}: {percent}% ({numVotes})')
-
     
+    print(f'{name}: {percent:.3f}% ({numVotes})')  
 print("----------------------------")
 
-    #Export to textfile
-    # csvpath = os.path.join('PyPoll', 'Analysis', 'Election_Results_Summary.txt')
-    # with open(csvpath,'w') as txt:
-    # txt.writelines(f"{candidate_x}: {canidate_percent}% ({Number_of_Votes})")
-    # txt.writelines("----------------------------")
+#Identify  maximum votes(key)
+winner_key = max(votes)
 
+#pull name of winner based on key
+winner = candidate_info[winner_key][0]
 
-
-
-#print(f"Winner: {Z}")
-#print("----------------------------")
-
-#Export to Text File
-#------------------------------------------------------------------------------------------------------------------------
-# csvpath = os.path.join('PyPoll', 'Analysis', 'Election_Results_Summary.txt')
-
-# with open(csvpath,'w') as txt:
-    
-    # txt.writelines("Election Results")
-    # txt.writelines("----------------------------")
-    # txt.writelines(f"Total Votes: {X}")
-    # txt.writelines("----------------------------")
-    # txt.writelines(f"Kahn: {Y1%}% ({Y1#})")
-    # txt.writelines(f"Correy: {Y2%}% ({Y2#})")
-    # txt.writelines(f"Li: {Y3%}% ({Y3})")
-    # txt.writelines(f"O'Tooley: {Y4%}% ({Y4#})")
-    # txt.writelines("----------------------------")
-    # txt.writelines(f"Winner: {Z}")
-    # txt.writelines("----------------------------")
+print(f'Winner: {winner}')
+print("----------------------------")
