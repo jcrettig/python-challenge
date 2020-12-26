@@ -36,40 +36,60 @@ print("----------------------------")
 print(f"Total Votes: {total_votes}")
 print("----------------------------")
 
-#Determine who are the unique candidates
-candidate_list = set(candidate_column)
+#Print to Text File
+csvpath = os.path.join('PyPoll', 'Analysis', 'Election_Results_Summary.txt')
 
-#Create Dictionary infrastructure and identify number_of_votes and the key
-candidate_info = {}
-for candidate_x in candidate_list:
-    number_of_votes = len([x for x in candidate_column if x == candidate_x])
-        
-    #Calculate perecent of votes
-    canidate_percent = 100 * number_of_votes / total_votes
-
-    #Insert components of dictionary consisting of number_of_votes, candidate_x and candidate_percent
-    candidate_info[number_of_votes] = (candidate_x, canidate_percent)
-
-#Create a list from the "candidate_info" dictionary of the keys
-votes = list(candidate_info.keys())
-
-#sort keys (votes) in decending order
-votes.sort(reverse=True)
-# pull data from dictionary to print
-for key in votes:
-    value = candidate_info[key]
-    name = value[0]
-    percent = value[1]
-    numVotes = key
+with open(csvpath,'w') as txt:
     
-    print(f'{name}: {percent:.3f}% ({numVotes})')  
-print("----------------------------")
+    txt.writelines("Election Results\n")
+    txt.writelines("----------------------------\n")
+    txt.writelines(f"Total Votes: {total_votes}\n")
+    txt.writelines("----------------------------\n")
 
-#Identify  maximum votes(key)
-winner_key = max(votes)
+    #Determine who are the unique candidates
+    candidate_list = set(candidate_column)
 
-#pull name of winner based on key
-winner = candidate_info[winner_key][0]
+    #Create Dictionary infrastructure and identify number_of_votes and the key
+    candidate_info = {}
+    for candidate_x in candidate_list:
+        number_of_votes = len([x for x in candidate_column if x == candidate_x])
+            
+        #Calculate perecent of votes
+        canidate_percent = 100 * number_of_votes / total_votes
 
-print(f'Winner: {winner}')
-print("----------------------------")
+        #Insert components of dictionary consisting of number_of_votes, candidate_x and candidate_percent
+        candidate_info[number_of_votes] = (candidate_x, canidate_percent)
+
+    #Create a list from the "candidate_info" dictionary of the keys
+    votes = list(candidate_info.keys())
+
+    #sort keys (votes) in decending order
+    votes.sort(reverse=True)
+    # pull data from dictionary to print
+    for key in votes:
+        value = candidate_info[key]
+        name = value[0]
+        percent = value[1]
+        numVotes = key
+        
+        #Print to Terminal
+        print(f'{name}: {percent:.3f}% ({numVotes})')  
+
+        #Print to Text File            
+        txt.writelines(f'{name}: {percent:.3f}% ({numVotes})\n')
+
+    #Identify  maximum votes(key)
+    winner_key = max(votes)
+
+    #pull name of winner based on key
+    winner = candidate_info[winner_key][0]
+
+    #Print to Terminal
+    print("----------------------------")
+    print(f'Winner: {winner}')
+    print("----------------------------")
+
+    #Print to Text File            
+    txt.writelines("----------------------------\n")
+    txt.writelines(f'Winner: {winner}\n')
+    txt.writelines("----------------------------\n")
