@@ -54,7 +54,7 @@ with open(csvpath,'w') as txt:
     for candidate_x in candidate_list:
         number_of_votes = len([x for x in candidate_column if x == candidate_x])
             
-        #Calculate perecent of votes
+        #Calculate percent of votes
         canidate_percent = 100 * number_of_votes / total_votes
 
         #Insert components of dictionary consisting of number_of_votes, candidate_x and candidate_percent

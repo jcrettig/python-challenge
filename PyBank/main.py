@@ -33,7 +33,7 @@ p_l_change = [profit_losses[i] - profit_losses[i-1] for i in range(1, len(profit
 
 # Calculations:
 #------------------------------------------------------------------------------------------------------------------------
-#Calculate Total Months                                         Should I use Unique?
+#Calculate Total Months                                         
 Total_Months = (len(months))
 
 #Calculation Net Profits
